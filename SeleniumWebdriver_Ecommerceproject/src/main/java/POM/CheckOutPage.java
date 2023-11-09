@@ -3,6 +3,10 @@ package POM;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CheckOutPage {
     WebDriver driver;
@@ -22,8 +26,19 @@ public class CheckOutPage {
     By shippingCity = By.id("shipping:city");
     By shippingTelephone = By.id("shipping:telephone");
 
+     By OrderRecievedMessage = By.cssSelector(".sub-title");
+     By orderNumberMessage = By.cssSelector(
+            "body > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > p:nth-child(3)");
 
+    By MobileLink = By.xpath("//a[normalize-space()='Mobile']");
 
+    By AddIphone = By.xpath("//li[1]//div[1]//div[3]//button[1]//span[1]//span[1]");
+
+    By CounponCode = By.xpath("//input[@id='coupon_code']");
+
+    By ApplyLink = By.xpath("//span[contains(text(),'Apply')]");
+
+    By grandtotalLink = By.cssSelector("strong span[class='price']");
 
 
     //Constructor with required parameter as a WedDriver
@@ -105,4 +120,41 @@ public class CheckOutPage {
         shippingTelephoneElement.clear();
         shippingTelephoneElement.sendKeys(telephone2);
     }
+
+    public String getOrderRecievedMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(OrderRecievedMessage)).getText();
+    }
+
+    public String getOrderNumber() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(orderNumberMessage)).getText();
+    }
+
+    public void clickMobileLink(){
+        WebElement element = driver.findElement(MobileLink);
+        element.click();
+    }
+
+    public void clickAddIphone(){
+        WebElement element = driver.findElement(AddIphone);
+        element.click();
+    }
+
+    public void enterCode(String code){
+        WebElement element = driver.findElement(CounponCode);
+        element.clear();
+        element.sendKeys(code);
+    }
+
+    public String getgrandtotal(){
+        String grandtotal = driver.findElement(grandtotalLink).getText();
+        return grandtotal;
+    }
+    public void clickApply(){
+        WebElement element = driver.findElement(ApplyLink);
+        element.click();
+    }
+
+
 }

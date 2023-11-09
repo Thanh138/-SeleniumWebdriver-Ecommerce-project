@@ -17,8 +17,7 @@ public class Register {
     By emailInput = By.xpath("//input[@id='email_address']");
     By passwordInput = By.xpath("//input[@id='password']");
     By confirmPasswordInput = By.xpath("//input[@id='confirmation']");
-    By registerButton = By.cssSelector("[href='http://live.techpanda.org/index.php/customer/account/']");
-
+    By registerButton = By.cssSelector("button[title='Register']");
     By getRegisterButton = By.xpath("//button[@title='Register']");
     public Register(WebDriver driver){
         this.driver = driver;
